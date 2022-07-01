@@ -1,45 +1,80 @@
 package com.example.demo.entity;
 
-import javax.persistence.*;
+
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.*;
+import java.rmi.UnexpectedException;
+import java.util.List;
 
 
 @Entity
-public class Dostavljac extends Korisnik implements Serializable {
 
-    @OneToMany
-    @JoinColumn(name = "dostavljacId")
-    private Set<Porudzbina> porudzbine = new HashSet<>();
+public class Komentar implements Serializable{
 
-    public Dostavljac() {
-        this.uloga = Uloga.DOSTAVLJAC;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idKomentar;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "KupacKomentar", referencedColumnName = "idKorisnika")
+    private Kupac kupac;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "RestoranKomentar", referencedColumnName = "idRestorana")
+    private Restoran restoran;
+
+    @Column
+    private String tekst;
+
+    @Column
+    private int ocena;
+
+    public Komentar(){}
+
+    public Komentar(Kupac kupac, Restoran restoran, String tekst, int ocena) {
+        this.kupac = kupac;
+        this.restoran = restoran;
+        this.tekst = tekst;
+        this.ocena = ocena;
     }
 
-    //Registration mapping
-    public Dostavljac(Korisnik korisnik){
-        this.uloga = Uloga.DOSTAVLJAC;
-        this.ime = korisnik.ime;
-        this.prezime = korisnik.prezime;
-        this.korisnicko = korisnik.korisnicko;
-        this.datum_rodjenja = korisnik.datum_rodjenja;
-        this.pol = korisnik.pol;
-        this.lozinka = korisnik.lozinka;
+    public Long getIdKomentar() {
+        return idKomentar;
     }
 
-    public Dostavljac(String korisnicko_ime, String lozinka, String ime, String prezime, Pol pol, Date datum_rodjenja, Set<Porudzbina> porudzbine) {
-        super(korisnicko_ime, lozinka, ime, prezime, pol, datum_rodjenja);
-        this.porudzbine = porudzbine;
-        this.uloga = Uloga.DOSTAVLJAC;
+    public void setIdKomentar(Long idKomentar) {
+        this.idKomentar = idKomentar;
     }
 
-    public Set<Porudzbina> getPorudzbine() {
-        return porudzbine;
+    public Kupac getKupac() {
+        return kupac;
     }
 
-    public void setPorudzbine(Set<Porudzbina> porudzbine) {
-        this.porudzbine = porudzbine;
+    public void setKupac(Kupac kupac) {
+        this.kupac = kupac;
+    }
+
+    public Restoran getRestoran() {
+        return restoran;
+    }
+
+    public void setRestoran(Restoran restoran) {
+        this.restoran = restoran;
+    }
+
+    public String getTekst() {
+        return tekst;
+    }
+
+    public void setTekst(String tekst) {
+        this.tekst = tekst;
+    }
+
+    public int getOcena() {
+        return ocena;
+    }
+
+    public void setOcena(int ocena) {
+        this.ocena = ocena;
     }
 }
