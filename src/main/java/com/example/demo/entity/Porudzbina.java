@@ -15,11 +15,11 @@ public class Porudzbina implements Serializable {
     @GeneratedValue
     private UUID uuid;
 
-    @OneToMany(cascade = CascadeType.ALL) //klasa kao stavka porudzbine kolicina porucenog, dodavanje kolicine
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<ArtikalZaPorudzbinu> artikalzaporudzbinu = new HashSet<>();
 
     @ManyToOne
-    @JoinColumn(name = "restoran id lokacija")
+    @JoinColumn(name = "restoranIdLokacija")
     @JsonIgnore
     private Restoran restoran;
 
@@ -31,7 +31,7 @@ public class Porudzbina implements Serializable {
     private float cena;
 
     @ManyToOne
-    @JoinColumn(name = "korisnicko ime")
+    @JoinColumn(name = "korisnickoIme")
     private Kupac kupac;
 
     @Enumerated(EnumType.STRING)
