@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Menadzer extends Korisnik implements Serializable {
 
     @OneToOne
-    @JoinColumn(name = "restoran_id", referencedColumnName = "idRestorana")
+    @JoinColumn(name = "restoranid", referencedColumnName = "idRestorana")
     private Restoran restoran;
 
     public Menadzer() {
