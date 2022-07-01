@@ -17,7 +17,7 @@ public class Restoran implements Serializable {
     private String naziv;
 
     @Column
-    private String tip_restorana;
+    private String tip;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Artikal> artikli = new HashSet<>();
@@ -29,9 +29,9 @@ public class Restoran implements Serializable {
 
     public Restoran(){}
 
-    public Restoran(String naziv, String tip_restorana, Set<Artikal> artikli, Set<Lokacija> lokacije) {
+    public Restoran(String naziv, String tip, Set<Artikal> artikli, Set<Lokacija> lokacije) {
         this.naziv = naziv;
-        this.tip_restorana = tip_restorana;
+        this.tip = tip;
         this.artikli = artikli;
         this.lokacije = lokacije;
     }
@@ -53,11 +53,11 @@ public class Restoran implements Serializable {
     }
 
     public String getTip_restorana() {
-        return tip_restorana;
+        return tip;
     }
 
     public void setTip_restorana(String tip_restorana) {
-        this.tip_restorana = tip_restorana;
+        this.tip = tip;
     }
 
     public Set<Artikal> getArtikli() {
